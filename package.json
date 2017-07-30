@@ -1,0 +1,22 @@
+{
+  "name": "flash",
+  "version": "1.0.0",
+  "description": "intro into constructor functions",
+  "main": "basicCard.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Trcka/flash-Cards.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Trcka/flash-Cards/issues"
+  },
+  "homepage": "https://github.com/Trcka/flash-Cards#readme",
+  "dependencies": {
+    "inquirer": "^3.2.1"
+  }
+}
