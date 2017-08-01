@@ -19,7 +19,8 @@ connection.connect(function(err) {
   if (err) throw err;
   // run the start function after the connection is made to prompt the user
 
-inquirer.prompt({
+function start(){
+  inquirer.prompt({
   type:"list",
   name:"action",
   message:"What do you want to do?",
@@ -73,6 +74,7 @@ function mkBasic(){
       function(err) {
         if (err) throw err;
         console.log("Your card was created successfully!");
+        console.log("-------------------------")    
       }
     );
   })
@@ -90,7 +92,6 @@ function mkCloze(){
     message:"whats the ans?",
     }
   ]).then(function(ans){
-    var stuff = new basicCard(ans.question, ans.answer);
     connection.query(
       "INSERT INTO clozeCard SET ?",
       {
@@ -100,14 +101,43 @@ function mkCloze(){
       function(err) {
         if (err) throw err;
         console.log("Your card was created successfully!");
+        console.log("-------------------------")
+        start();
       }
     );
+});
 }
 function revBasic(){
   console.log("revbasic");
+  var choiceArray =[];
+    connection.query("SELECT * FROM basicCard", function(err, results) {
+      if(err) throw err;
+      for (var i = 0; i < results.length; i++) {
+        choiceArray.push(results[i].item_name);
+      }
+    });
+    console.log("-------------------------")
+    start();
 }
 function revCloze(){
   console.log("revcloze");
+  var questionArray=[];
+  var answerArray=[];
+  connection.query("SELECT * FROM clozeCard", function(err, results) {
+    if(err) throw err;
+    for (var i = 0; i < results.length; i++) {
+      questionArray.push(results[i].question);
+    }
+    for (var i = 0; i < results.length; i++) {
+      answerArray.push(results[i].answer);
+    }
+    console.log(questionArray);
+    console.log(answerArray);
+    console.log("-------------------------")
+    start();
+  });
 }
 
+};
+start();
 });
